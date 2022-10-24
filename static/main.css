@@ -1,0 +1,68 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: whitesmoke;
+    background-color: rgb(30, 30, 30);
+}
+
+nav {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+a {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-decoration: none;
+    color: orange;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: orange;
+}
+
+a:hover {
+    color: red;
+}
+
+table,
+th,
+td {
+    border: 1px solid rgb(60, 60, 60);
+    border-collapse: collapse;
+}
+
+.date-selector {
+    text-align: center;
+}
+
+table {
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    width: 85%;
+    text-align: center;
+}
+
+tbody>tr {
+    height: 75px;
+}
+
+.logo {
+    max-height: 50px;
+    max-width: 50px;
+}
+
+/* .row {
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.cell {
+    flex: 1;
+    height: 100%;
+    padding: 0;
+} */

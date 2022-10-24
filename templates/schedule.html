@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <title>NHL Unleashed</title>
+    {# <meta name='viewport' content='width=device-width, initial-scale=1'> #}
+    <link rel="icon" href="/static/favicon.svg" sizes="any" type="image/svg+xml">
+    <link rel='stylesheet' type='text/css' media='screen' href='/static/main.css'>
+</head>
+
+<body>
+    <nav>
+        <a href="/">NHLTV Unleashed</a> 
+        <hr>
+    </nav>
+
+    <div class="date-selector">
+        <a href="/date/{{prev}}">Prev</a>
+        <span>{{date}}</span>
+        <a href="/date/{{next}}">Next</a>
+    </div>
+
+    <table>
+        <thead>
+            <tr class="row">
+                <th class="cell cell-1">Time</th>
+                {# <th class="cell cell-1">Away</th> #}
+                <th class="cell cell-2">Away</th>
+                <th class="cell cell-1">Home</th>
+                {# <th class="cell cell-2">Home</th> #}
+                <th class="cell cell-1">Status</th>
+                <th class="cell cell-2">Playbacks</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for game in games %}
+            <tr class="row">
+                <td class="cell cell-1">{{ game.startTime | local_time}}</td>
+                {# <td class="cell cell-2">{{game.teams.away.team.name}}</td> #}
+                <td class="cell cell-1"><img class="logo" src="/static/logos/{{ game.awayCompetitor.shortName }}.svg"></td>
+                <td class="cell cell-1"><img class="logo" src="/static/logos/{{ game.homeCompetitor.shortName }}.svg"></td>
+                {# <td class="cell cell-2">{{game.teams.home.team.name}}</td> #}
+
+
+                <td class="cell cell-1">
+                    {# {% if game.status.detailedState == 'Final' %}
+                    {{game.status.detailedState}}
+                    {% if game.linescore.periods.length > 3 %}
+                    {% set x = game.linescore.periods | last %}
+                    - {{ x.ordinalNum }}
+                    {% endif %}
+                    <br>
+                    ({{ game.linescore.teams.away.goals }} - {{ game.linescore.teams.home.goals }})
+
+                    {% elif game.status.detailedState in ['Scheduled', 'Pre-Game', 'Postponed']%}
+                    {{game.status.detailedState}}
+
+                    {% else %}
+                    {% if game.linescore.intermissionInfo.inIntermission %}
+                    {{ game.linescore.currentPeriodOrdinal }} INT -
+                    {{ game.linescore.intermissionInfo.intermissionTimeRemaining | secToMinSec}}
+                    {% else %}
+                    {{ game.linescore.currentPeriodOrdinal }} - {{ game.linescore.currentPeriodTimeRemaining }}
+                    {% endif %}
+                    <br>
+                    ({{ game.linescore.teams.away.goals }} - {{ game.linescore.teams.home.goals }})
+
+                    {% endif %} #}
+                </td>
+
+
+                <td class="cell cell-2">
+                    {% for content in game.content %}
+                        {% if content.contentType.name == 'Full Game' %}
+                            <div><a href=" /play/{{ content.id }}">
+                            {% if content.clientContentMetadata %}
+                                {{ content.clientContentMetadata[0].name }}
+                            {% else %}
+                                OTHER
+                            {% endif %}
+                            </a></div>
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>
